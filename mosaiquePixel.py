@@ -2,17 +2,18 @@ import cv2
 import os
 import glob
 import numpy
-# imgLaink = cv2.imread('c:/Users/Axel/Desktop/code/APMBSI/mosaique/BRframe0062.jpg', cv2.IMREAD_UNCHANGED)
-# imgLainkResize = cv2.resize(imgLaink, (920,720))
-# cv2.imwrite('c:/Users/Axel/Desktop/code/APMBSI/mosaique/newRick.jpg', imgLainkResize )
-# imgLaink = cv2.imread('c:/Users/Axel/Desktop/code/APMBSI/mosaique/newRick.jpg', cv2.IMREAD_UNCHANGED)
+
+# path : folder with the small pictures composing the mosaics
+# path2 : folder with the frames of the original video
 path = glob.glob("/home/debian/testMosa/data40/*.jpg")
 path2 = glob.glob("/home/debian/testMosa/dataVid/*.jpg")
 
+# list of the small pictures
 listeImg = []
+# list of RGB list of small images
 couleurImg = []
 
-
+# analysis of small images
 for img in path:
         n = cv2.imread(img)
         listeImg.append(n)
@@ -28,11 +29,13 @@ for img in path:
         g = g/1600
         b = b/1600
         couleurImg.append([r,g,b])
-idx=0
+
+# table of frames
 tabTest = []
 for img in path2:
         tabTest.append(img)
 tabTest = sorted(tabTest)
+
 lastMosa = []
 for nbrImg in range(len(tabTest)):
         print(tabTest[nbrImg])
@@ -95,6 +98,5 @@ for nbrImg in range(len(tabTest)):
         cv2.imwrite(pathImg, mosaique)
         lastMosa = tabMosaique
 
-        idx=idx+1
 
                 
